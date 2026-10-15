@@ -1,0 +1,293 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Registered marketplace user profile (farmer, buyer, or admin)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["farmer", "buyer", "admin"] },
+        "phone": { "type": "string" },
+        "county": { "type": "string" },
+        "subCounty": { "type": "string" },
+        "location": { "type": "string" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "farmSize": { "type": "string" },
+        "farmTypes": { "type": "array" },
+        "businessName": { "type": "string" },
+        "verified": { "type": "boolean" },
+        "avatar": { "type": "string" },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "suspended", "pending"] },
+        "joinedDate": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role", "county"]
+    },
+    "Produce": {
+      "title": "Produce",
+      "description": "Agricultural produce listing published by a farmer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "quantity": { "type": "number" },
+        "unit": { "type": "string" },
+        "pricePerUnit": { "type": "number" },
+        "minimumOrder": { "type": "number" },
+        "county": { "type": "string" },
+        "subCounty": { "type": "string" },
+        "location": { "type": "string" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "harvestDate": { "type": "string" },
+        "isOrganic": { "type": "boolean" },
+        "grade": { "type": "string" },
+        "images": { "type": "array" },
+        "farmerId": { "type": "string" },
+        "farmerName": { "type": "string" },
+        "farmerPhone": { "type": "string" },
+        "farmerCounty": { "type": "string" },
+        "farmerRating": { "type": "number" },
+        "farmerVerified": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["available", "low_stock", "sold_out", "reserved"] },
+        "approvalStatus": { "type": "string", "enum": ["approved", "pending", "rejected"] },
+        "inquiriesCount": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "category", "quantity", "unit", "pricePerUnit", "farmerId", "county"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Escrow-backed transaction order between a buyer and farmer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "buyerId": { "type": "string" },
+        "buyerName": { "type": "string" },
+        "buyerPhone": { "type": "string" },
+        "buyerEmail": { "type": "string" },
+        "farmerId": { "type": "string" },
+        "farmerName": { "type": "string" },
+        "farmerPhone": { "type": "string" },
+        "produceId": { "type": "string" },
+        "produceTitle": { "type": "string" },
+        "produceCategory": { "type": "string" },
+        "produceImage": { "type": "string" },
+        "quantity": { "type": "number" },
+        "unit": { "type": "string" },
+        "unitPrice": { "type": "number" },
+        "subtotal": { "type": "number" },
+        "logisticsFee": { "type": "number" },
+        "platformFee": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string" },
+        "deliveryLocation": { "type": "string" },
+        "deliveryCounty": { "type": "string" },
+        "deliveryLatitude": { "type": "number" },
+        "deliveryLongitude": { "type": "number" },
+        "farmLatitude": { "type": "number" },
+        "farmLongitude": { "type": "number" },
+        "paymentStatus": { "type": "string" },
+        "escrowStatus": { "type": "string" },
+        "trackingNumber": { "type": "string" },
+        "logisticsProvider": { "type": "string" },
+        "estimatedDelivery": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "buyerId", "farmerId", "produceId", "quantity", "totalAmount", "status"]
+    },
+    "Negotiation": {
+      "title": "Negotiation",
+      "description": "Price counter-offer negotiation between buyer and farmer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "produceId": { "type": "string" },
+        "produceTitle": { "type": "string" },
+        "produceImage": { "type": "string" },
+        "produceUnit": { "type": "string" },
+        "originalPrice": { "type": "number" },
+        "buyerId": { "type": "string" },
+        "buyerName": { "type": "string" },
+        "farmerId": { "type": "string" },
+        "farmerName": { "type": "string" },
+        "quantity": { "type": "number" },
+        "proposedPrice": { "type": "number" },
+        "status": { "type": "string" },
+        "history": { "type": "array" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "produceId", "buyerId", "farmerId", "proposedPrice", "status"]
+    },
+    "MarketPrice": {
+      "title": "MarketPrice",
+      "description": "Wholesale market commodity price benchmark across Kenyan hubs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "commodity": { "type": "string" },
+        "category": { "type": "string" },
+        "variety": { "type": "string" },
+        "unit": { "type": "string" },
+        "marketName": { "type": "string" },
+        "county": { "type": "string" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "wholesalePrice": { "type": "number" },
+        "retailPrice": { "type": "number" },
+        "farmgatePrice": { "type": "number" },
+        "trend": { "type": "string" },
+        "trendPercentage": { "type": "number" },
+        "demand": { "type": "string" },
+        "supply": { "type": "string" },
+        "dateUpdated": { "type": "string" }
+      },
+      "required": ["id", "commodity", "marketName", "wholesalePrice", "unit"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Chat dialogue thread between two marketplace users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "participants": { "type": "array" },
+        "participantNames": { "type": "object" },
+        "otherUserId": { "type": "string" },
+        "otherUserName": { "type": "string" },
+        "otherUserRole": { "type": "string" },
+        "lastMessage": { "type": "string" },
+        "lastMessageTime": { "type": "string" },
+        "unreadCount": { "type": "number" },
+        "produceName": { "type": "string" },
+        "orderId": { "type": "string" }
+      },
+      "required": ["id", "participants"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Individual message in a conversation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "conversationId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "receiverId": { "type": "string" },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "read": { "type": "boolean" },
+        "produceName": { "type": "string" },
+        "orderId": { "type": "string" }
+      },
+      "required": ["id", "conversationId", "senderId", "receiverId", "content", "timestamp"]
+    },
+    "Dispute": {
+      "title": "Dispute",
+      "description": "Escrow order dispute resolution ticket",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderId": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "raisedBy": { "type": "string" },
+        "raisedByName": { "type": "string" },
+        "raisedAgainst": { "type": "string" },
+        "raisedAgainstName": { "type": "string" },
+        "reason": { "type": "string" },
+        "description": { "type": "string" },
+        "amountInEscrow": { "type": "number" },
+        "status": { "type": "string" },
+        "adminDecision": { "type": "string" },
+        "resolution": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "orderId", "raisedBy", "reason", "description", "status"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Escrow ledger entry and financial payment record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderId": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "userId": { "type": "string" },
+        "type": { "type": "string" },
+        "amount": { "type": "number" },
+        "currency": { "type": "string" },
+        "status": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string" }
+      },
+      "required": ["id", "orderId", "userId", "type", "amount", "status"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "In-app alert for user actions, order updates, or price changes",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string" },
+        "read": { "type": "boolean" },
+        "link": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "message", "type", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents indexed by authentication UID"
+    },
+    "/produce/{produceId}": {
+      "schema": "Produce",
+      "description": "Farm produce items listed for sale"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Marketplace purchase orders with escrow tracking"
+    },
+    "/negotiations/{negotiationId}": {
+      "schema": "Negotiation",
+      "description": "Counter-offer threads between buyers and farmers"
+    },
+    "/marketPrices/{priceId}": {
+      "schema": "MarketPrice",
+      "description": "Benchmark commodity market prices across regional hubs"
+    },
+    "/conversations/{conversationId}": {
+      "schema": "Conversation",
+      "description": "Direct message threads between users"
+    },
+    "/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Individual chat message records"
+    },
+    "/disputes/{disputeId}": {
+      "schema": "Dispute",
+      "description": "Order dispute claims reviewed by administrators"
+    },
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Payment records and escrow holds/releases"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "User notifications"
+    }
+  }
+}

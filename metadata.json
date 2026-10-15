@@ -1,0 +1,6 @@
+{
+  "name": "AgriMa",
+  "description": "AgriMa (Farm Produce Market) is a digital agricultural platform connecting farmers directly with produce buyers, featuring direct price negotiations, transparent market pricing benchmarks, escrow-secured orders, and role-specific dashboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
